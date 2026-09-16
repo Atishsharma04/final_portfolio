@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atish Sharma — AI &amp; ML Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EDEEE9;
+    --paper-raised: #E3E5DE;
+    --ink: #191C1F;
+    --ink-soft: #3A3F44;
+    --line: #C7CBC1;
+    --accent: #3E6B89;
+    --accent-warm: #C1592B;
+    --muted: #656B63;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #14171A;
+      --paper-raised: #1B1F23;
+      --ink: #ECEEE9;
+      --ink-soft: #C7CBC1;
+      --line: #33383D;
+      --accent: #7FB2D4;
+      --accent-warm: #E28A5C;
+      --muted: #9CA3A0;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14171A;
+    --paper-raised: #1B1F23;
+    --ink: #ECEEE9;
+    --ink-soft: #C7CBC1;
+    --line: #33383D;
+    --accent: #7FB2D4;
+    --accent-warm: #E28A5C;
+    --muted: #9CA3A0;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.01em;
+    color: var(--muted);
+  }
+
+  /* ---------- header ---------- */
+  header.site {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+  }
+  .nav-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 1.05rem;
+  }
+  nav.links { display: flex; gap: 28px; }
+  nav.links a {
+    text-decoration: none;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  nav.links a:hover { color: var(--ink); border-color: var(--accent); }
+
+  /* ---------- corner-bracket frame, used as the recurring structural device ---------- */
+  .bracket {
+    position: relative;
+    padding: 28px;
+  }
+  .bracket::before, .bracket::after,
+  .bracket .bl, .bracket .br {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-color: var(--accent);
+    border-style: solid;
+    border-width: 0;
+  }
+  .bracket::before { top: 0; left: 0; border-top-width: 2px; border-left-width: 2px; }
+  .bracket::after { top: 0; right: 0; border-top-width: 2px; border-right-width: 2px; }
+  .bracket .bl { bottom: 0; left: 0; border-bottom-width: 2px; border-left-width: 2px; }
+  .bracket .br { bottom: 0; right: 0; border-bottom-width: 2px; border-right-width: 2px; }
+
+  /* ---------- badge card ---------- */
+  .badge-wrap { display: flex; justify-content: center; }
+  .badge-card {
+    position: relative;
+    width: 100%;
+    max-width: 272px;
+    border-radius: 22px;
+    background:
+      repeating-linear-gradient(135deg, color-mix(in srgb, var(--line) 45%, transparent) 0 1px, transparent 1px 7px),
+      var(--paper-raised);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 40px -20px rgba(0,0,0,0.35);
+    padding: 40px 22px 26px;
+  }
+  .badge-hole {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1px solid var(--line);
+  }
+  .badge-label {
+    position: absolute;
+    top: 46px;
+    left: 16px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+  }
+  .badge-card .badge-svg { width: 100%; height: auto; margin: 4px 0 18px; }
+  .badge-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 1.15;
+    margin: 0 0 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .badge-rows { display: flex; flex-direction: column; gap: 8px; }
+  .badge-row {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .badge-row .k { color: var(--muted); }
+  .badge-row a { text-decoration: none; color: var(--ink-soft); border-bottom: 1px solid transparent; }
+  .badge-row a:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ---------- hero ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    align-items: center;
+    padding: 72px 0 84px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    line-height: 1.05;
+    margin: 0 0 20px;
+  }
+  .hero .role {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 34ch;
+    margin: 0 0 28px;
+  }
+  .hero p.bio {
+    max-width: 52ch;
+    color: var(--ink-soft);
+    margin: 0 0 32px;
+  }
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    font-size: 0.92rem;
+  }
+  .contact-row a {
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 1px;
+  }
+  .contact-row a:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-art { display: flex; justify-content: center; }
+  .hero-art svg { width: 100%; max-width: 360px; height: auto; }
+
+  .scan {
+    animation: scan-sweep 2.6s ease-in-out 0.3s 1 both;
+    transform-origin: left center;
+  }
+  @keyframes scan-sweep {
+    0%   { transform: translateY(-92px); opacity: 0; }
+    12%  { opacity: 1; }
+    88%  { opacity: 1; }
+    100% { transform: translateY(92px); opacity: 0; }
+  }
+  .pulse-node { animation: node-pulse 2.6s ease-in-out 0.3s 1 both; }
+  @keyframes node-pulse {
+    0%, 100% { r: 4; }
+    50% { r: 7; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scan, .pulse-node { animation: none; }
+  }
+
+  /* ---------- sections ---------- */
+  section { padding: 76px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .section-head h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 1.8rem;
+    margin: 0;
+  }
+  .section-head .lede {
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin: 0;
+  }
+
+  /* ---------- skills ---------- */
+  .skill-group { margin-bottom: 26px; }
+  .skill-group:last-child { margin-bottom: 0; }
+  .skill-group h3 {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    margin: 0 0 12px;
+  }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    border: 1px solid var(--line);
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- projects ---------- */
+  .project {
+    margin-bottom: 40px;
+  }
+  .project:last-child { margin-bottom: 0; }
+  .project-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin-bottom: 6px;
+  }
+  .project-head h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 1.3rem;
+    margin: 0;
+  }
+  .project .domain { color: var(--accent); }
+  .project .stack {
+    margin: 4px 0 16px;
+  }
+  .project p, .project ul {
+    color: var(--ink-soft);
+    max-width: 68ch;
+    margin: 0 0 6px;
+  }
+  .project ul { padding-left: 20px; margin-top: 10px; }
+  .project li { margin-bottom: 6px; }
+  .project .affil {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--accent-warm);
+    font-size: 0.85rem;
+  }
+
+  /* ---------- education / certs ---------- */
+  .edu-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+  }
+  .edu-row:last-child { border-bottom: none; }
+  .edu-list { border-bottom: 1px solid var(--line); }
+  .edu-row .deg { font-weight: 500; }
+  .edu-row .school { color: var(--ink-soft); }
+  .edu-row .when { color: var(--muted); white-space: nowrap; }
+
+  .cert-list { list-style: none; padding: 0; margin: 0; }
+  .cert-list li {
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .cert-list li:last-child { padding-bottom: 0; }
+  .cert-mark { color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; }
+
+  /* ---------- footer / contact ---------- */
+  footer {
+    padding: 76px 0 60px;
+  }
+  footer h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    max-width: 16ch;
+    margin: 0 0 32px;
+  }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 32px;
+  }
+  .footer-links a {
+    text-decoration: none;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+  }
+  .footer-links a:hover { border-color: var(--accent); color: var(--accent); }
+  .foot-note { margin-top: 56px; color: var(--muted); font-size: 0.82rem; }
+
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; padding: 48px 0 56px; }
+    .badge-wrap { order: -1; margin: 0 auto 8px; }
+    .badge-card { max-width: 220px; }
+    .section-head { grid-template-columns: 1fr; gap: 14px; }
+    .nav-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+    nav.links { gap: 20px; flex-wrap: wrap; }
+    section { padding: 52px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <div class="nav-name">Atish Sharma</div>
+    <nav class="links">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero" style="border-bottom:1px solid var(--line);">
+      <div>
+        <h1>Building systems that see, hear, and understand.</h1>
+        <p class="role">AI &amp; ML engineering student — computer vision, NLP, and speech systems, built end to end.</p>
+        <p class="bio">Final-year Computer Science Engineering (AI &amp; ML) student at Himachal Pradesh Technical University, currently researching disaster-response computer vision at NIT Jalandhar. I like taking a model out of a notebook and into something a person can actually use.</p>
+      </div>
+      <div class="badge-wrap">
+        <div class="badge-card">
+          <div class="badge-hole" aria-hidden="true"></div>
+          <div class="badge-label">AI/ML ENGINEER</div>
+          <svg class="badge-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0.5" y="0.5" width="219" height="219" fill="none" stroke="var(--line)" stroke-width="1"/>
+            <rect x="28" y="36" width="80" height="92" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+            <rect x="116" y="92" width="68" height="74" fill="none" stroke="var(--accent-warm)" stroke-width="1.5"/>
+            <g stroke="var(--muted)" stroke-width="1">
+              <line x1="43" y1="55" x2="86" y2="73"/>
+              <line x1="86" y1="73" x2="67" y2="110"/>
+              <line x1="67" y1="110" x2="43" y2="55"/>
+              <line x1="86" y1="73" x2="134" y2="116"/>
+              <line x1="134" y1="116" x2="159" y2="140"/>
+            </g>
+            <g fill="var(--ink)">
+              <circle cx="43" cy="55" r="3"/>
+              <circle cx="86" cy="73" r="3"/>
+              <circle cx="67" cy="110" r="3"/>
+              <circle cx="159" cy="140" r="3"/>
+            </g>
+            <circle class="pulse-node" cx="134" cy="116" r="3.5" fill="var(--accent-warm)"/>
+            <g stroke="var(--accent)" stroke-width="2">
+              <path d="M28 36 h7 M28 36 v7" fill="none"/>
+              <path d="M108 128 h-7 M108 128 v-7" fill="none"/>
+            </g>
+            <rect class="scan" x="0" y="80" width="220" height="1.5" fill="var(--accent)" opacity="0.5"/>
+          </svg>
+          <div class="badge-name">Atish Sharma</div>
+          <div class="badge-rows">
+            <div class="badge-row"><span class="k">EMAIL</span>|<a href="mailto:atisharma112004@gmail.com">atisharma112004@gmail.com</a></div>
+            <div class="badge-row"><span class="k">PHONE</span>|<a href="tel:+918091023796">+91 8091023796</a></div>
+            <div class="badge-row"><span class="k">GITHUB</span>|<a href="https://github.com/Atishsharma04" target="_blank" rel="noopener">Atishsharma04</a></div>
+            <div class="badge-row"><span class="k">LINKEDIN</span>|<a href="https://www.linkedin.com/in/atish-sharma-a0612a401/" target="_blank" rel="noopener">atish-sharma</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-head">
+        <h2>Skills</h2>
+        <p class="lede">The toolkit spans model training, classical CV, and the full-stack work needed to ship it.</p>
+      </div>
+
+      <div class="skill-group">
+        <h3>Languages</h3>
+        <div class="chip-row">
+          <span class="chip">Python</span><span class="chip">C++</span><span class="chip">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Frameworks &amp; libraries</h3>
+        <div class="chip-row">
+          <span class="chip">TensorFlow / Keras</span><span class="chip">PyTorch</span><span class="chip">Scikit-learn</span>
+          <span class="chip">OpenCV</span><span class="chip">SAM</span><span class="chip">Whisper</span>
+          <span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">Matplotlib</span>
+          <span class="chip">React.js</span><span class="chip">Flutter</span><span class="chip">Express.js</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Web &amp; data</h3>
+        <div class="chip-row">
+          <span class="chip">REST APIs</span><span class="chip">HTML5 / CSS3</span><span class="chip">MySQL</span>
+          <span class="chip">MongoDB</span><span class="chip">JSON</span><span class="chip">Routing &amp; middleware</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Tools &amp; platforms</h3>
+        <div class="chip-row">
+          <span class="chip">Git / GitHub</span><span class="chip">Docker</span><span class="chip">VS Code</span>
+          <span class="chip">Postman</span><span class="chip">Google Colab</span><span class="chip">Jupyter</span>
+          <span class="chip">Vercel</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="section-head">
+        <h2>Work</h2>
+        <p class="lede">Four projects across computer vision, speech, networking, and applied ML.</p>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>SAM-based building damage assessment</h3>
+          <span class="mono domain">computer vision · remote sensing</span>
+        </div>
+        <div class="mono stack">SAM · MobileNetV3 · EfficientNet-B0 · satellite imagery</div>
+        <ul>
+          <li>Built a post-disaster building damage assessment pipeline that uses the Segment Anything Model to extract individual building regions from satellite imagery.</li>
+          <li>Benchmarked original, SAM-segmented, and bounding-box cropped inputs through MobileNetV3 and EfficientNet-B0 to compare damage-classification accuracy.</li>
+        </ul>
+        <span class="affil">Research Intern — Dr. B. R. Ambedkar National Institute of Technology (NIT) Jalandhar</span>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>Emotion-aware multilingual voice translator</h3>
+          <span class="mono domain">speech · NLP</span>
+        </div>
+        <div class="mono stack">Python · Whisper · Coqui TTS · translation</div>
+        <p>An AI-powered voice translation system that chains speech recognition, emotion detection, translation, and text-to-speech, so the translated speech carries the original's tone rather than flattening it.</p>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>Peer-to-peer messaging application</h3>
+          <span class="mono domain">networking · security</span>
+        </div>
+        <div class="mono stack">Python · Flutter · React · RSA · mDNS</div>
+        <p>A secure messaging app with RSA-encrypted messages and automatic peer discovery over the local network via mDNS/zeroconf — no central server required.</p>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>Spam detection application</h3>
+          <span class="mono domain">machine learning · NLP</span>
+        </div>
+        <div class="mono stack">Python · Scikit-learn · NLP</div>
+        <p>An ML-based spam classifier built around NLP preprocessing and feature extraction, trained and evaluated with Scikit-learn.</p>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="section-head">
+        <h2>Education</h2>
+        <p class="lede">&nbsp;</p>
+      </div>
+      <div class="edu-list">
+        <div class="edu-row">
+          <div>
+            <div class="deg">B.Tech, Computer Science Engineering (AI &amp; ML)</div>
+            <div class="school">Himachal Pradesh Technical University, Hamirpur</div>
+          </div>
+          <div class="when mono">expected 06/2027</div>
+        </div>
+      </div>
+
+      <div style="margin-top:44px;">
+        <h3 style="font-size:0.85rem; font-weight:500; color:var(--muted); margin:0 0 4px;">Certifications</h3>
+        <ul class="cert-list">
+          <li><span class="cert-mark">/</span> Deloitte Data Analytics Job Simulation</li>
+          <li><span class="cert-mark">/</span> Power BI Certification</li>
+          <li><span class="cert-mark">/</span> HP LIFE Certification — Cybersecurity</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <footer id="contact">
+    <div class="wrap">
+      <h2>Working on something in vision, speech, or ML? Let's talk.</h2>
+      <div class="footer-links">
+        <a href="mailto:atisharma112004@gmail.com">atisharma112004@gmail.com</a>
+        <a href="tel:+918091023796">+91 8091023796</a>
+        <a href="https://www.linkedin.com/in/atish-sharma-a0612a401/" target="_blank" rel="noopener" data-role="linkedin">LinkedIn</a>
+        <a href="https://github.com/Atishsharma04" target="_blank" rel="noopener" data-role="github">GitHub</a>
+      </div>
+      <p class="foot-note">Himachal Pradesh, India</p>
+    </div>
+  </footer>
+</main>
+
+</body>
+</html>
